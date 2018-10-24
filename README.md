@@ -19,17 +19,7 @@ import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
 import javax.sql.DataSource;
 
-/**
- * quartz定时任务配置
- * ========================
- * Created with IntelliJ IDEA.
- * User：恒宇少年
- * Date：2017/11/5
- * Time：14:07
- * 码云：http://git.oschina.net/jnyqy
- * ========================
- * @author  恒宇少年
- */
+
 @Configuration
 @EnableScheduling
 public class QuartzConfiguration
@@ -204,16 +194,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-/**
- * ========================
- *
- * @author 恒宇少年
- * Created with IntelliJ IDEA.
- * Date：2017/11/5
- * Time：14:59
- * 码云：http://git.oschina.net/jnyqy
- * ========================
- */
+
 @Entity
 @Table(name = "basic_good_info")
 @Data
@@ -244,31 +225,14 @@ public class GoodInfoEntity
 }
 下面我们根据商品实体来创建JPA接口，如下所示：
 
-/**
- * ========================
- * Created with IntelliJ IDEA.
- * Date：2017/11/5
- * Time：14:55
- * 码云：http://git.oschina.net/jnyqy
- * ========================
- * @author 恒宇少年
- */
+
 public interface GoodInfoRepository
     extends JpaRepository<GoodInfoEntity,Long>
 {
 }
 接下来我们再来添加一个商品添加的控制器方法，如下所示：
 
-/**
- * ========================
- *
- * @author 恒宇少年
- * Created with IntelliJ IDEA.
- * Date：2017/11/5
- * Time：15:02
- * 码云：http://git.oschina.net/jnyqy
- * ========================
- */
+
 @RestController
 @RequestMapping(value = "/good")
 public class GoodController
@@ -290,17 +254,7 @@ public class GoodController
 }
 在请求商品添加方法时，我们调用了GoodInfoService内的saveGood方法，传递一个商品的实例作为参数。我们接下来看看该类内相关代码，如下所示：
 
-/**
- * 商品业务逻辑
- * ========================
- *
- * @author 恒宇少年
- * Created with IntelliJ IDEA.
- * Date：2017/11/5
- * Time：15:04
- * 码云：http://git.oschina.net/jnyqy
- * ========================
- */
+
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class GoodInfoService
@@ -331,17 +285,7 @@ public class GoodInfoService
 定义商品添加定时任务
 我们先来创建一个任务实例，并且继承org.springframework.scheduling.quartz.QuartzJobBean抽象类，重写父抽象类内的executeInternal方法来实现任务的主体逻辑。如下所示：
 
-/**
- * 商品添加定时任务实现类
- * ========================
- * Created with IntelliJ IDEA.
- * User：恒宇少年
- * Date：2017/11/5
- * Time：14:47
- * 码云：http://git.oschina.net/jnyqy
- * ========================
- * @author 恒宇少年
- */
+
 public class GoodAddTimer
     extends QuartzJobBean
 {
@@ -364,17 +308,7 @@ public class GoodAddTimer
 定义商品库存检查任务
 同样需要继承org.springframework.scheduling.quartz.QuartzJobBean抽象类实现抽象类内的executeInternal方法，如下所示：
 
-/**
- * 商品库存检查定时任务
- * ========================
- *
- * @author 恒宇少年
- * Created with IntelliJ IDEA.
- * Date：2017/11/5
- * Time：15:47
- * 码云：http://git.oschina.net/jnyqy
- * ========================
- */
+
 public class GoodStockCheckTimer
     extends QuartzJobBean
 {
