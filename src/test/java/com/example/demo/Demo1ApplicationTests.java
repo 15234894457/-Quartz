@@ -36,16 +36,16 @@ public class Demo1ApplicationTests {
     }
 
     /**
-     * 测试添加商品
+     * 测试添加
      * @throws Exception
      */
     @Test
     public void addGood() throws Exception
     {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/good/save")
-                .param("name","西瓜")
-                .param("unit","斤")
-                .param("price","12.88")
+                .param("name","西瓜11")
+                .param("unit","斤11")
+                .param("price","12.81811")
         )
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().is(200))

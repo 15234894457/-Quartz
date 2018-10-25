@@ -17,14 +17,7 @@ import javax.sql.DataSource;
 
 /**
  * quartz定时任务配置
- * ========================
- * Created with IntelliJ IDEA.
- * User：恒宇少年
- * Date：2017/11/5
- * Time：14:07
- * 码云：http://git.oschina.net/jnyqy
- * ========================
- * @author  恒宇少年
+ 
  */
 @Configuration
 @EnableScheduling

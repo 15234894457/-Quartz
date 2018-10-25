@@ -20,17 +20,7 @@ import com.example.demo.timers.GoodSecKillRemindTimer;
 import com.example.demo.timers.GoodStockCheckTimer;
 
 
-/**
- * 商品业务逻辑
- * ========================
- *
- * @author 恒宇少年
- * Created with IntelliJ IDEA.
- * Date：2017/11/5
- * Time：15:04
- * 码云：http://git.oschina.net/jnyqy
- * ========================
- */
+
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class GoodInfoService
@@ -41,30 +31,30 @@ public class GoodInfoService
     @Autowired
     private Scheduler scheduler;
     /**
-     * 商品数据接口
+     *  数据接口
      */
     @Autowired
     private GoodInfoRepository goodInfoRepository;
 
     /**
-     * 保存商品基本信息
-     * @param good 商品实例
+     * 保存 基本信息
+     * @param good  实例
      * @return
      */
     public Long saveGood(GoodInfoEntity good) throws Exception
     {
         goodInfoRepository.save(good);
-        //构建创建商品定时任务
+        //构建创建 定时任务
         buildCreateGoodTimer();
-        //构建商品库存定时任务
+        //构建 库存定时任务
         buildGoodStockTimer();
-        //构建商品描述提醒定时任务
+        //构建 描述提醒定时任务
         buildGoodSecKillRemindTimer(good.getId());
         return good.getId();
     }
 
     /**
-     * 构建创建商品定时任务
+     * 构建创建 定时任务
      */
     public void buildCreateGoodTimer() throws Exception
     {
@@ -83,7 +73,7 @@ public class GoodInfoService
     }
 
     /**
-     * 构建商品库存定时任务
+     * 构建 库存定时任务
      * @throws Exception
      */
     public void buildGoodStockTimer() throws Exception
@@ -93,7 +83,7 @@ public class GoodInfoService
         //任务所属分组
         String group = GoodStockCheckTimer.class.getName();
 
-        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0/5 * * * * ?");
+        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0/2 * * * * ?");
         //创建任务
         JobDetail jobDetail = JobBuilder.newJob(GoodStockCheckTimer.class).withIdentity(name,group).build();
         //创建任务触发器
@@ -103,7 +93,7 @@ public class GoodInfoService
     }
 
     /**
-     * 构建商品秒杀提醒定时任务
+     * 构建 秒杀提醒定时任务
      * 设置五分钟后执行
      * @throws Exception
      */
@@ -120,7 +110,7 @@ public class GoodInfoService
                 .withIdentity(name,group)
                 .build();
 
-        //设置任务传递商品编号参数
+        //设置任务传递 编号参数
         jobDetail.getJobDataMap().put("goodId",goodId);
 
         //创建任务触发器

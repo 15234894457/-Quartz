@@ -18,6 +18,6 @@ public class Demo1Application {
 
 		SpringApplication.run(Demo1Application.class, args);
 
-		logger.info("【【【【【【定时任务分布式节点 - quartz-cluster-node-first 已启动】】】】】】");
+		logger.info("【【【【【【定时任务已启动】】】】】】");
 	}
 }
